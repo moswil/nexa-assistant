@@ -5,7 +5,7 @@ Handles user interactions via HTTP endpoints.
 """
 
 from fastapi import APIRouter
-from app.api.v1.schemas import AskRequest, AskResponse, HistoryResponse, QuestionHistoryItem
+from app.api.v1.schemas import AskRequest, AskResponse, HistoryResponse, HistoryEntry
 from app.domain.services import QuestionService
 
 
@@ -46,17 +46,22 @@ def get_routes(service: QuestionService) -> APIRouter:
     @router.get("/history", response_model=HistoryResponse)
     async def get_history():
         """
-        Retrieve all previously asked questions.
+        Retrieve all previously asked questions and their responses.
 
         Returns
         -------
         HistoryResponse
-            A list of historical questions and timestamps.
+            A list of historical question-response pairs with timestamps.
         """
         history = await service.get_history()
         return HistoryResponse(
             history=[
-                QuestionHistoryItem(text=q.text, timestamp=q.timestamp) for q in history
+                HistoryEntry(
+                    question=entry.text,
+                    response=entry.response,
+                    timestamp=entry.timestamp
+                )
+                for entry in history
             ]
         )
 

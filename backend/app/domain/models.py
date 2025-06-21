@@ -18,8 +18,11 @@ class Question:
     ----------
     text : str
         The question text submitted by the user.
+    response : str
+        The response to the question submitted by the user.
     timestamp : datetime
         The UTC timestamp of when the question was submitted.
     """
     text: str
+    response: str
     timestamp: datetime

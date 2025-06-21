@@ -12,7 +12,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from app.domain.services import QuestionService
 from app.adapters.mongo.repo import MongoQuestionRepository
 from app.adapters.responder.static_response import StaticResponder
-from app.adapters.responder.dynamic_response import OpenAIResponder
+from app.adapters.responder.togetherai_responder import TogetherAIResponder
 
 
 # Load environment variables
@@ -32,8 +32,8 @@ repository = MongoQuestionRepository(
 
 # Responder (can be replaced later)
 responder = StaticResponder()
-openai_responder = OpenAIResponder()
+togetherai_responder = TogetherAIResponder()
 
 # Application service
 question_service = QuestionService(
-    repository=repository, responder=responder)
+    repository=repository, responder=togetherai_responder)

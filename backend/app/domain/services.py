@@ -60,10 +60,15 @@ class QuestionService:
         str
             The generated assistant response.
         """
+        _timestamp = datetime.now(timezone.utc)
+
+        response = await self._responder.respond(question_text)
         question = Question(text=question_text,
-                            timestamp=datetime.now(timezone.utc))
+                            response=response,
+                            timestamp=_timestamp)
         await self._repository.save(question)
-        return await self._responder.respond(question_text)
+        # return await self._responder.respond(question_text)
+        return response
 
     async def get_history(self) -> list[Question]:
         """

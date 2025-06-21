@@ -34,28 +34,31 @@ class AskResponse(BaseModel):
     response: str
 
 
-class QuestionHistoryItem(BaseModel):
+class HistoryEntry(BaseModel):
     """
-    Schema for a single entry in the conversation history.
+    Schema representing a single conversation history entry.
 
     Attributes
     ----------
-    text : str
-        The question text.
+    question : str
+        The user's original question.
+    response : str
+        The assistant's generated response.
     timestamp : datetime
-        When the question was submitted.
+        Time the question-response pair was stored.
     """
-    text: str
+    question: str
+    response: str
     timestamp: datetime
 
 
 class HistoryResponse(BaseModel):
     """
-    Schema for the history endpoint response.
+    Schema for the /history endpoint response.
 
     Attributes
     ----------
-    history : list[QuestionHistoryItem]
-        The list of previously submitted questions.
+    history : list[HistoryEntry]
+        List of previous Q&A entries.
     """
-    history: list[QuestionHistoryItem]
+    history: list[HistoryEntry]

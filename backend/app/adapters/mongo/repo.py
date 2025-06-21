@@ -44,6 +44,7 @@ class MongoQuestionRepository(QuestionRepository):
         """
         await self._collection.insert_one({
             "text": question.text,
+            "response": question.response,
             "timestamp": question.timestamp
         })
 
@@ -57,4 +58,5 @@ class MongoQuestionRepository(QuestionRepository):
             A list of all stored questions.
         """
         documents = self._collection.find().sort("timestamp", 1)
-        return [Question(text=doc["text"], timestamp=doc["timestamp"]) async for doc in documents]
+        return [Question(text=doc["text"], response=doc["response"],
+                         timestamp=doc["timestamp"]) async for doc in documents]

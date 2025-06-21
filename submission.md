@@ -24,7 +24,6 @@ A minimal fullstack assistant that allows users to ask questions and receive AI-
 | **AI**       | Together.ai API (can plug any LLM) |
 | **Database** | MongoDB                            |
 | **Infra**    | Docker, Docker Compose, dotenv     |
-| **Testing**  | Pytest (backend)                   |
 
 ---
 
@@ -108,6 +107,7 @@ pytest
 - ✅ Admin panel (manage history, rate limits)
 - ✅ Switchable LLM adapters via config
 - ✅ Refine the UI to have a chat-like interface and clean UI
+- ✅ Add tests for both front-end and back-end.
 
 ---
 
